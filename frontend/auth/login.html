@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login | FractureOrSprain?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../assets/css/styles.css"/>
+    <script src="../assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- Login Section -->
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-surface-bright to-surface-container-low px-margin-mobile md:px-margin-desktop">
+        <div class="w-full max-w-md">
+            <!-- Logo/Brand -->
+            <div class="text-center mb-stack-lg">
+                <a href="../index.html" class="inline-flex items-center gap-2 font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed mb-2">
+                    <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                </a>
+                <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Welcome Back</h1>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                    Sign in to access your health assessments
+                </p>
+            </div>
+
+            <!-- Login Card -->
+            <div class="bg-surface-container-lowest rounded-2xl shadow-ambient border border-outline-variant/30 p-8">
+                <form id="login-form" class="space-y-6">
+                    <!-- Username/Email Field -->
+                    <div>
+                        <label for="username" class="block font-label-md text-label-md text-on-surface mb-2">
+                            Username or Email
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username"
+                            placeholder="Enter your username or email"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none font-body-md text-body-md transition-all"
+                        />
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block font-label-md text-label-md text-on-surface mb-2">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                                class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none font-body-md text-body-md transition-all"
+                            />
+                            <button 
+                                type="button"
+                                onclick="togglePassword('password')"
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors"
+                            >
+                                <span class="material-symbols-outlined" id="password-icon">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input 
+                                type="checkbox" 
+                                id="remember"
+                                class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                            />
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">Remember me</span>
+                        </label>
+                        <a href="#" class="font-body-sm text-body-sm text-primary hover:underline">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button 
+                        type="submit"
+                        class="w-full bg-primary-container text-on-primary px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all shadow-ambient flex items-center justify-center gap-2"
+                    >
+                        Sign In
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-outline-variant"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-surface-container-lowest font-body-sm text-body-sm text-on-surface-variant">
+                                New to FractureOrSprain?
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Link -->
+                    <div class="text-center">
+                        <a 
+                            href="signup.html" 
+                            class="inline-flex items-center gap-2 border border-outline-variant text-on-surface px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-container transition-all"
+                        >
+                            Create Account
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import { signInUser, waitForFirebaseInit } from '../assets/js/auth.js';
+
+        // Toggle password visibility
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + '-icon');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                field.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // Make togglePassword available globally
+        window.togglePassword = togglePassword;
+
+        // Show loading state
+        function showLoading(button) {
+            button.disabled = true;
+            button.innerHTML = `
+                <span class="material-symbols-outlined animate-spin">progress_activity</span>
+                Signing in...
+            `;
+        }
+
+        // Reset button state
+        function resetButton(button) {
+            button.disabled = false;
+            button.innerHTML = `
+                Sign In
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            `;
+        }
+
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const submitButton = this.querySelector('button[type="submit"]');
+            
+            // Basic validation
+            if (!username || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Show loading state
+            showLoading(submitButton);
+
+            // Wait for Firebase to initialize
+            const firebaseReady = await waitForFirebaseInit();
+            if (!firebaseReady) {
+                alert('Firebase is not initialized. Please refresh the page and try again.');
+                resetButton(submitButton);
+                return;
+            }
+
+            // Attempt to sign in with Firebase
+            const result = await signInUser(username, password);
+            
+            if (result.success) {
+                // Success! Show message and redirect
+                alert('Login successful! Welcome back.');
+                
+                // Redirect to home page
+                window.location.href = '../index.html';
+            } else {
+                // Show error message
+                let displayMessage = result.error;
+                
+                // Add helpful suggestions
+                if (result.error.includes('Username not found')) {
+                    displayMessage += '\n\nTip: Try logging in with your email address instead, or create a new account.';
+                } else if (result.error.includes('Incorrect password')) {
+                    displayMessage += '\n\nIf you forgot your password, look for a "Forgot password?" link or contact support.';
+                } else if (result.error.includes('Invalid username/email')) {
+                    displayMessage += '\n\nMake sure you are entering the correct username or email. Check for typos or spaces.';
+                }
+                
+                alert(`Login failed: ${displayMessage}`);
+                resetButton(submitButton);
+            }
+        });
+    </script>
+</body>
+</html>

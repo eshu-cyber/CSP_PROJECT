@@ -1,0 +1,66 @@
+.medical-pattern {
+    background-image: radial-gradient(#bec9c1 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Animation System 1: Scroll Fade-In */
+@media (prefers-reduced-motion: no-preference) {
+    .reveal {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    @media (min-width: 768px) {
+        .reveal {
+            transform: translateY(30px);
+        }
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    
+    /* Staggering children */
+    .reveal-stagger-1.active { transition-delay: 100ms; }
+    .reveal-stagger-2.active { transition-delay: 200ms; }
+    .reveal-stagger-3.active { transition-delay: 300ms; }
+    .reveal-stagger-4.active { transition-delay: 400ms; }
+    .reveal-stagger-5.active { transition-delay: 500ms; }
+    
+    /* Specific card staggers */
+    .card-stagger-1.active { transition-delay: 80ms; }
+    .card-stagger-2.active { transition-delay: 160ms; }
+    .card-stagger-3.active { transition-delay: 240ms; }
+
+    /* Animation System 2: Stats Bounce & Glow */
+    @keyframes bounceGlow {
+        0% { transform: scale(1); box-shadow: 0 0 0 rgba(11, 110, 79, 0); }
+        30% { transform: scale(1.12); box-shadow: 0 0 20px rgba(11, 110, 79, 0.4); }
+        60% { transform: scale(0.96); box-shadow: 0 0 10px rgba(11, 110, 79, 0.2); }
+        80% { transform: scale(1.04); }
+        100% { transform: scale(1); box-shadow: 0 0 0 rgba(11, 110, 79, 0); }
+    }
+    .stat-bounce {
+        animation: bounceGlow 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .progress-bar {
+        transition: width 1200ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+    .animate-bounce {
+        animation: bounce 0.6s ease-in-out infinite;
+    }
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>How It Works | FractureOrSprain?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/styles.css"/>
+    <script src="../../assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+        <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <a href="../../index.html" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span>FractureOrSprain?</span>
+            </a>
+            <div class="hidden md:flex gap-gutter items-center font-label-md text-label-md">
+                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1" href="how-it-works.html">How It Works</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#assessment">Assessment</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#case-studies">Example Scenarios</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../ai-doctor/ai-doctor.html">AI Doctor</a>
+            </div>
+            <a href="../../index.html#assessment" class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-surface-tint transition-all hover:scale-95 duration-100 ease-in-out flex items-center gap-2">
+                Start Triage <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <section class="pt-[120px] pb-stack-md bg-gradient-to-br from-surface-bright to-surface-container-low text-center">
+        <div class="max-w-4xl mx-auto px-margin-desktop">
+            <span class="inline-block px-3 py-1 bg-primary-container/10 text-primary font-label-sm text-label-sm rounded-full mb-4">Behind the AI Technology</span>
+            <h1 class="font-display-lg text-display-lg text-on-surface mb-4">How Our Models Predict Injuries</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Discover the clinical decision logic and neural networks that differentiate a simple sprain from a bone fracture.
+            </p>
+        </div>
+    </section>
+
+    <!-- Technology Overview -->
+    <section class="py-stack-md bg-surface">
+        <div class="max-w-6xl mx-auto px-margin-desktop space-y-12">
+            <!-- Two Core Systems Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- System 1: Random Forest -->
+                <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ambient border border-outline-variant/30 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-full bg-primary-container/20 flex items-center justify-center text-primary mb-6">
+                            <span class="material-symbols-outlined text-3xl">psychology</span>
+                        </div>
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-4">1. The Symptom Triage Model</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            When you answer clinical questions about pain level, swelling, bruising, and mobility loss, our backend processes the inputs using a **Random Forest Classifier** machine learning model.
+                        </p>
+                        
+                        <!-- Simple explanation list -->
+                        <div class="space-y-4 mb-6">
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-sm text-label-sm flex-shrink-0 mt-1">1</div>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface">The "Panel of Experts" concept</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Imagine consulting 200 doctors. Each doctor makes a decision by asking a series of yes/no questions (a decision tree). The final diagnosis is decided by a majority vote.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary font-label-sm text-label-sm flex-shrink-0 mt-1">2</div>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface">Weighted Indicators</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">The model has learned that some signs (like visible bone deformity or sharp pain on bone pressure) are extremely high indicators of a fracture, while others (like general mild swelling) point towards a sprain.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-surface-container-high rounded-xl">
+                        <p class="font-label-sm text-label-sm text-primary uppercase mb-2">Model Features Used</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Pain intensity · Bruising · Obvious deformity · Loss of movement · Point tenderness · Weight-bearing capability · Mechanism of injury
+                        </p>
+                    </div>
+                </div>
+
+                <!-- System 2: CNN X-Ray Model -->
+                <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ambient border border-outline-variant/30 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary mb-6">
+                            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">radiology</span>
+                        </div>
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-4">2. The X-Ray Image Classifier</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            When you upload an X-ray scan, our system uses a **Convolutional Neural Network (CNN)**. This is a deep learning model specifically designed to read and analyze images.
+                        </p>
+
+                        <!-- Simple explanation list -->
+                        <div class="space-y-4 mb-6">
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-label-sm text-label-sm flex-shrink-0 mt-1">1</div>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface">The "Visual Filter" concept</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">The CNN scans the image pixel-by-pixel, applying special mathematical filters to highlight borders, textures, and lines in the bone. It checks if there are dark breaks or fractures in the highlighted edges.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-label-sm text-label-sm flex-shrink-0 mt-1">2</div>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface">Calibrated Probability Thresholds</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">A typical AI might check if the prediction is over 50%. Our model is calibrated to classify a scan as a fracture if the sigmoid value drops below the strict threshold of **0.002**, capturing even faint hairline cracks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-surface-container-high rounded-xl">
+                        <p class="font-label-sm text-label-sm text-secondary uppercase mb-2">Technical Specifications</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Input size: 128x128 pixels · Layer types: Convolutional (feature extractor) & Pooling (reducer) · Output: Sigmoid probability (fracture vs. normal)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Dive: Step-by-Step Triage Logic -->
+            <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ambient border border-outline-variant/30">
+                <h3 class="font-headline-md text-headline-md text-on-surface text-center mb-8">How an Assessment Flows</h3>
+                
+                <div class="grid md:grid-cols-4 gap-6 relative">
+                    <!-- Step 1 -->
+                    <div class="text-center space-y-3 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mx-auto shadow-sm">1</div>
+                        <p class="font-label-md text-label-md text-on-surface">Data Gathering</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">You fill out symptoms or drop an X-ray image into the triage box.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="text-center space-y-3 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mx-auto shadow-sm">2</div>
+                        <p class="font-label-md text-label-md text-on-surface">Preprocessing</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Images are resized to 128x128 and normalized so lighting doesn't confuse the AI.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="text-center space-y-3 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mx-auto shadow-sm">3</div>
+                        <p class="font-label-md text-label-md text-on-surface">Model Processing</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">The RandomForest evaluates symptom trees; the CNN reads pixel borders.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="text-center space-y-3 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mx-auto shadow-sm">4</div>
+                        <p class="font-label-md text-label-md text-on-surface">Clinical Calibration</p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Results are translated to safety levels (e.g. Red for Fracture Emergency, Green for Sprain).</p>
+                    </div>
+
+                    <!-- Connecting Line for Desktop -->
+                    <div class="hidden md:block absolute top-6 left-12 right-12 h-0.5 bg-outline-variant/30 -z-0"></div>
+                </div>
+            </div>
+
+            <!-- FAQ/Safety disclaimer -->
+            <div class="bg-primary-container/10 p-8 rounded-3xl border border-primary/20 max-w-4xl mx-auto">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                    <div>
+                        <h4 class="font-headline-sm text-headline-sm text-primary mb-2">Important Medical Disclaimer</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            Our models are highly trained but provide **preliminary triage estimates** for guidance only. Hairline fractures can be extremely subtle, and swelling can disguise deeper tissue tears. **Never ignore clinical pain.** Always consult a certified radiologist or medical practitioner for an official diagnosis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full pt-stack-lg pb-stack-md border-t border-outline-variant/50 dark:border-outline/30">
+        <div class="flex flex-col items-center gap-stack-md px-margin-desktop max-w-container-max mx-auto text-center">
+            <div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">
+                FractureOrSprain?
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/privacy-policy.html">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/terms-of-service.html">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/medical-disclaimer.html">Medical Disclaimer</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../support/contact-support.html">Contact Support</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/hipaa-compliance.html">HIPAA Compliance</a>
+            </div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant mt-4">
+                &copy; 2026 FractureOrSprain? Clinical Triage Systems. Professional Grade Assessment.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AI Doctor | FractureOrSprain?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/styles.css"/>
+    <script src="../../assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+        <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <a href="../../index.html" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span>FractureOrSprain?</span>
+            </a>
+            <div class="hidden md:flex gap-gutter items-center font-label-md text-label-md">
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../how-it-works/how-it-works.html">How It Works</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#assessment">Assessment</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#case-studies">Example Scenarios</a>
+                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1" href="ai-doctor.html">AI Doctor</a>
+            </div>
+            <a href="../../index.html#assessment" class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-surface-tint transition-all hover:scale-95 duration-100 ease-in-out flex items-center gap-2">
+                Start Triage <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Chat Section -->
+    <section class="pt-[80px] pb-stack-md bg-gradient-to-br from-surface-bright to-surface-container-low">
+        <div class="max-w-6xl mx-auto px-margin-desktop flex gap-6 py-6">
+            <!-- Sidebar with Health Tips -->
+            <div class="hidden lg:block w-80 space-y-4">
+                <!-- Health Quote Card -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-ambient border border-outline-variant/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-4xl">💊</div>
+                        <p class="font-headline-sm text-headline-sm text-primary">Daily Health Tip</p>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant italic" id="health-quote">
+                        "An apple a day keeps the doctor away, but if the doctor is cute, forget the fruit!"
+                    </p>
+                </div>
+
+                <!-- Fun Doctor Stickers -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-ambient border border-outline-variant/30">
+                    <p class="font-label-md text-label-md text-on-surface mb-4">Quick Reactions</p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="sendSticker('👨‍⚕️')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">👨‍⚕️</button>
+                        <button onclick="sendSticker('💉')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">💉</button>
+                        <button onclick="sendSticker('🩺')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">🩺</button>
+                        <button onclick="sendSticker('💊')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">💊</button>
+                        <button onclick="sendSticker('🏥')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">🏥</button>
+                        <button onclick="sendSticker('❤️‍🩹')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">❤️‍🩹</button>
+                        <button onclick="sendSticker('🤕')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">🤕</button>
+                        <button onclick="sendSticker('😷')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">😷</button>
+                        <button onclick="sendSticker('🌡️')" class="text-4xl hover:scale-110 transition-transform p-2 hover:bg-surface-container rounded-lg">🌡️</button>
+                    </div>
+                </div>
+
+                <!-- Quick Health Facts -->
+                <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-ambient border border-outline-variant/30">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="material-symbols-outlined text-primary">lightbulb</span>
+                        <p class="font-label-md text-label-md text-on-surface">Did You Know?</p>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant" id="health-fact">
+                        Your bones are 4 times stronger than concrete!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="flex-1 flex flex-col bg-surface-container-lowest rounded-3xl shadow-elevated border border-outline-variant/30 overflow-hidden" style="height: 700px;">
+                <!-- Chat Header -->
+                <div class="bg-primary-container p-4 flex items-center gap-3 border-b border-outline-variant/30">
+                    <div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-3xl">
+                        👨‍⚕️
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-headline-sm text-headline-sm text-on-primary">Dr. AI Assistant</p>
+                        <p class="font-body-sm text-body-sm text-on-primary/80 flex items-center gap-1">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            Online - Ready to help
+                        </p>
+                    </div>
+                    <button onclick="clearChat()" class="text-on-primary hover:bg-surface-container/20 p-2 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">delete_sweep</span>
+                    </button>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Welcome Message -->
+                    <div class="flex gap-3 items-start">
+                        <div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-2xl flex-shrink-0">
+                            👨‍⚕️
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-surface-container-high p-4 rounded-2xl rounded-tl-none max-w-md">
+                                <p class="font-body-md text-body-md text-on-surface">
+                                    Hello! I'm Dr. AI, your virtual health assistant powered by advanced AI. 👋
+                                </p>
+                                <p class="font-body-md text-body-md text-on-surface mt-2">
+                                    I can help you with:
+                                </p>
+                                <ul class="mt-2 space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                                    <li>• Injury assessment and symptoms</li>
+                                    <li>• Fractures vs sprains identification</li>
+                                    <li>• First aid and treatment advice</li>
+                                    <li>• When to seek emergency care</li>
+                                    <li>• General health questions</li>
+                                </ul>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-3 italic">
+                                    💡 I'm specialized in health topics only. Ask me anything about your health!
+                                </p>
+                            </div>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 ml-2">Just now</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Suggestions -->
+                <div id="quick-suggestions" class="px-6 pb-4">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Quick Questions:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="sendQuickMessage('I twisted my ankle and it hurts. Could it be a fracture?')" class="px-4 py-2 bg-surface-container-high hover:bg-primary-container/20 rounded-full font-body-sm text-body-sm text-on-surface transition-colors">
+                            Could my ankle be fractured?
+                        </button>
+                        <button onclick="sendQuickMessage('What is the R.I.C.E method and how do I use it?')" class="px-4 py-2 bg-surface-container-high hover:bg-primary-container/20 rounded-full font-body-sm text-body-sm text-on-surface transition-colors">
+                            What is R.I.C.E method?
+                        </button>
+                        <button onclick="sendQuickMessage('When should I go to the emergency room for an injury?')" class="px-4 py-2 bg-surface-container-high hover:bg-primary-container/20 rounded-full font-body-sm text-body-sm text-on-surface transition-colors">
+                            When to go to ER?
+                        </button>
+                        <button onclick="sendQuickMessage('How can I tell the difference between a fracture and a sprain?')" class="px-4 py-2 bg-surface-container-high hover:bg-primary-container/20 rounded-full font-body-sm text-body-sm text-on-surface transition-colors">
+                            Fracture vs Sprain?
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-4 border-t border-outline-variant/30 bg-surface">
+                    <div class="flex gap-3">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            placeholder="Type your health question..." 
+                            class="flex-1 px-4 py-3 rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none font-body-md text-body-md"
+                            onkeypress="handleKeyPress(event)"
+                        />
+                        <button onclick="sendMessage()" class="bg-primary-container text-on-primary px-6 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all flex items-center gap-2">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 text-center">
+                        <span class="material-symbols-outlined text-[14px] align-middle">info</span>
+                        This is AI-generated advice. Always consult a healthcare professional for serious concerns.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full pt-stack-lg pb-stack-md border-t border-outline-variant/50 dark:border-outline/30 reveal">
+        <div class="flex flex-col items-center gap-stack-md px-margin-desktop max-w-container-max mx-auto text-center reveal reveal-stagger-1">
+            <div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">
+                FractureOrSprain?
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/privacy-policy.html">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/terms-of-service.html">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/medical-disclaimer.html">Medical Disclaimer</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../support/contact-support.html">Contact Support</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../policies/hipaa-compliance.html">HIPAA Compliance</a>
+            </div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant mt-4">
+                &copy; 2026 FractureOrSprain? Clinical Triage Systems. Professional Grade Assessment.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/ai-doctor.js"></script>
+    <script type="module" src="../../assets/js/require-auth.js"></script>
+</body>
+</html>

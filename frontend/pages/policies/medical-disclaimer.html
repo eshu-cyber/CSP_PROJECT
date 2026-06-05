@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Medical Disclaimer | FractureOrSprain?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/styles.css"/>
+    <script src="../../assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+        <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <a href="../../index.html" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span>FractureOrSprain?</span>
+            </a>
+            <div class="hidden md:flex gap-gutter items-center font-label-md text-label-md">
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../how-it-works/how-it-works.html">How It Works</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#assessment">Assessment</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#case-studies">Example Scenarios</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../ai-doctor/ai-doctor.html">AI Doctor</a>
+            </div>
+            <a href="../../index.html#assessment" class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-surface-tint transition-all hover:scale-95 duration-100 ease-in-out flex items-center gap-2">
+                Start Triage <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Medical Disclaimer Content (truncated for brevity) -->
+    <section class="pt-[120px] pb-stack-lg bg-gradient-to-br from-surface-bright to-surface-container-low min-h-screen">
+        <div class="max-w-4xl mx-auto px-margin-desktop">
+            <div class="text-center mb-stack-lg">
+                <h1 class="font-display-lg text-display-lg text-on-surface mb-4">Medical Disclaimer</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Important Information About Our AI-Powered Service
+                </p>
+            </div>
+
+            <div class="bg-surface-container-lowest rounded-3xl shadow-ambient border border-outline-variant/30 p-stack-lg space-y-6">
+                <div class="bg-error-container/20 p-6 rounded-xl border-2 border-error">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="material-symbols-outlined text-4xl text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+                        <h2 class="font-headline-md text-headline-md text-error">Critical Notice</h2>
+                    </div>
+                    <p class="font-body-lg text-body-lg text-on-surface mb-3">
+                        <strong>FractureOrSprain? IS NOT A SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE, DIAGNOSIS, OR TREATMENT.</strong>
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay seeking it because of information provided by our service.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">1. AI-Powered Analysis Limitations</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                        Our service uses artificial intelligence and machine learning models to analyze medical symptoms and images. You should understand:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 font-body-md text-body-md text-on-surface-variant">
+                        <li><strong>AI models are not doctors:</strong> Our machine learning algorithms analyze patterns but cannot replace human medical judgment and expertise</li>
+                        <li><strong>Limited training data:</strong> AI models are trained on specific datasets and may not account for rare conditions or individual variations</li>
+                        <li><strong>Probabilistic outputs:</strong> AI provides probability-based assessments, not definitive diagnoses</li>
+                    </ul>
+                </div>
+
+                <div class="pt-6 border-t border-outline-variant/30">
+                    <a href="../../index.html" class="inline-flex items-center gap-2 text-primary hover:underline font-label-md text-label-md">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full pt-stack-lg pb-stack-md border-t border-outline-variant/50 dark:border-outline/30">
+        <div class="flex flex-col items-center gap-stack-md px-margin-desktop max-w-container-max mx-auto text-center">
+            <div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">
+                FractureOrSprain?
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="privacy-policy.html">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="terms-of-service.html">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="medical-disclaimer.html">Medical Disclaimer</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../support/contact-support.html">Contact Support</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="hipaa-compliance.html">HIPAA Compliance</a>
+            </div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant mt-4">
+                &copy; 2026 FractureOrSprain? Clinical Triage Systems. Professional Grade Assessment.
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="../../assets/js/require-auth.js"></script>
+</body>
+</html>

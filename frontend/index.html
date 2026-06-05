@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>FractureOrSprain? | AI-Powered Triage</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/styles.css"/>
+    <script src="assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+        <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <div class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span>FractureOrSprain?</span>
+            </div>
+            <div id="navbar-links" class="hidden md:flex gap-gutter items-center font-label-md text-label-md">
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="pages/how-it-works/how-it-works.html">How It Works</a>
+                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1" href="#assessment">Assessment</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#case-studies">Example Scenarios</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="pages/ai-doctor/ai-doctor.html">AI Doctor</a>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="logout-button" class="border border-outline-variant text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-surface-container transition-all">
+                    Logout
+                </button>
+                <button onclick="scrollToAssessment()" class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-surface-tint transition-all hover:scale-95 duration-100 ease-in-out flex items-center gap-2">
+                    Start Triage <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-[120px] pb-stack-lg min-h-[921px] flex items-center relative overflow-hidden bg-gradient-to-br from-surface-bright to-surface-container-low reveal">
+        <div class="absolute inset-0 medical-pattern opacity-30"></div>
+        <div class="max-w-container-max mx-auto px-margin-desktop relative z-10 w-full grid md:grid-cols-2 gap-stack-lg items-center">
+            <div>
+                <span class="inline-block px-3 py-1 bg-surface-container-high text-primary font-label-sm text-label-sm rounded-full mb-6 reveal reveal-stagger-1">AI-Powered Clinical Triage</span>
+                <h1 class="font-display-lg text-display-lg text-on-surface mb-6 reveal reveal-stagger-2">
+                    Is It a Fracture<br/>or a Sprain?
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-md max-w-md reveal reveal-stagger-3">
+                    Get a rapid, professional-grade assessment in 2 minutes. Answer clinical questions or upload an X-ray for AI analysis to determine your next steps.
+                </p>
+                <div class="flex flex-wrap gap-4 reveal reveal-stagger-4">
+                    <button onclick="scrollToAssessment()" class="bg-primary-container text-on-primary px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all shadow-ambient flex items-center gap-2">
+                        Start Symptom Check
+                    </button>
+                    <button onclick="triggerHeroXrayUpload()" class="border border-outline-variant bg-surface-container-lowest text-on-surface px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined">upload_file</span> Upload X-Ray
+                    </button>
+                </div>
+            </div>
+            <div class="relative h-full flex items-center justify-center reveal reveal-stagger-5">
+                <!-- How It Works Card -->
+                <div id="how-it-works" class="bg-surface-container-lowest p-stack-md rounded-2xl shadow-elevated w-full max-w-sm border border-outline-variant/30 transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container">
+                            <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                        </div>
+                        <div>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant uppercase">AI-Powered Analysis</p>
+                            <p class="font-headline-sm text-headline-sm text-on-surface">How It Works</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[18px]">quiz</span>
+                            </div>
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface mb-1">Answer Questions</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Simple clinical questions about your injury</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[18px]">analytics</span>
+                            </div>
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface mb-1">AI Analysis</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Advanced algorithms assess your symptoms</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-primary text-[18px]">medical_information</span>
+                            </div>
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface mb-1">Get Results</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Instant triage recommendation & next steps</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-outline-variant/30">
+                        <div class="grid grid-cols-2 gap-3 text-center">
+                            <div class="bg-surface-container-high p-3 rounded-lg">
+                                <p class="font-headline-md text-headline-md text-primary mb-1 card-stat-container" data-target="94">
+                                    <span class="stat-number">0</span>%
+                                </p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Accuracy</p>
+                            </div>
+                            <div class="bg-surface-container-high p-3 rounded-lg">
+                                <p class="font-headline-md text-headline-md text-primary mb-1">2 min</p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Assessment</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-primary-container/10 rounded-lg">
+                        <p class="font-body-sm text-body-sm text-on-surface-variant text-center">
+                            <span class="material-symbols-outlined text-[16px] align-middle">info</span>
+                            Not a replacement for professional medical advice
+                        </p>
+                    </div>
+                </div>
+                <!-- Decorative elements -->
+                <div class="absolute -z-10 w-64 h-64 bg-primary-fixed/20 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="py-stack-lg bg-surface-container-low reveal" id="case-studies">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal reveal-stagger-1">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Example Scenarios</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    See how our AI-powered system analyzes different injury patterns and provides accurate diagnoses
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 reveal reveal-stagger-2">
+                <!-- Case Study 1: Fracture -->
+                <div class="bg-surface-container-lowest rounded-2xl shadow-ambient border border-outline-variant/30 overflow-hidden hover:shadow-elevated transition-all">
+                    <div class="bg-gradient-to-br from-error/20 to-error-container/30 p-6">
+                        <div class="w-12 h-12 rounded-full bg-error-container/40 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-2xl text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+                        </div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Scenario #1: Ankle Fracture</h3>
+                        <p class="font-label-sm text-label-sm text-error uppercase">High Risk</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Example Profile:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Patient slipped on stairs</p>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Symptoms:</p>
+                            <ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                                <li>• Pain Level: 9/10</li>
+                                <li>• Severe swelling</li>
+                                <li>• Visible deformity</li>
+                                <li>• Cannot bear weight</li>
+                                <li>• Bruising present</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-outline-variant/30">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="font-label-md text-label-md text-on-surface">AI Diagnosis:</p>
+                                <span class="bg-error-container/20 text-error px-3 py-1 rounded-full font-label-sm text-label-sm">Fracture</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Confidence:</p>
+                                <p class="font-label-md text-label-md text-error">98%</p>
+                            </div>
+                            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden mt-2">
+                                <div class="h-full bg-error" style="width: 98%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-error-container/10 p-3 rounded-lg">
+                            <p class="font-body-sm text-body-sm text-on-surface">
+                                <strong>Expected Outcome:</strong> High likelihood of displaced fracture requiring immediate emergency care.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2: Sprain -->
+                <div class="bg-surface-container-lowest rounded-2xl shadow-ambient border border-outline-variant/30 overflow-hidden hover:shadow-elevated transition-all">
+                    <div class="bg-gradient-to-br from-secondary/20 to-secondary-container/30 p-6">
+                        <div class="w-12 h-12 rounded-full bg-secondary-container/40 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-2xl text-secondary" style="font-variation-settings: 'FILL' 1;">healing</span>
+                        </div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Scenario #2: Wrist Sprain</h3>
+                        <p class="font-label-sm text-label-sm text-secondary uppercase">Moderate Risk</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Example Profile:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Sports-related injury</p>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Symptoms:</p>
+                            <ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                                <li>• Pain Level: 6/10</li>
+                                <li>• Moderate swelling</li>
+                                <li>• No deformity</li>
+                                <li>• Can bear weight</li>
+                                <li>• Limited mobility</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-outline-variant/30">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="font-label-md text-label-md text-on-surface">AI Diagnosis:</p>
+                                <span class="bg-secondary-container/20 text-secondary px-3 py-1 rounded-full font-label-sm text-label-sm">Sprain</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Confidence:</p>
+                                <p class="font-label-md text-label-md text-secondary">87%</p>
+                            </div>
+                            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden mt-2">
+                                <div class="h-full bg-secondary" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-secondary-container/10 p-3 rounded-lg">
+                            <p class="font-body-sm text-body-sm text-on-surface">
+                                <strong>Expected Outcome:</strong> Likely Grade 2 sprain. RICE protocol recommended, typical recovery 3-6 weeks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 3: Normal/Minor -->
+                <div class="bg-surface-container-lowest rounded-2xl shadow-ambient border border-outline-variant/30 overflow-hidden hover:shadow-elevated transition-all">
+                    <div class="bg-gradient-to-br from-primary/20 to-primary-container/30 p-6">
+                        <div class="w-12 h-12 rounded-full bg-primary-container/40 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-2xl text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        </div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Scenario #3: Minor Injury</h3>
+                        <p class="font-label-sm text-label-sm text-primary uppercase">Low Risk</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Example Profile:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Minor fall or bump</p>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface mb-2">Symptoms:</p>
+                            <ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+                                <li>• Pain Level: 3/10</li>
+                                <li>• Mild swelling</li>
+                                <li>• No deformity</li>
+                                <li>• Can bear weight easily</li>
+                                <li>• Normal mobility</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-outline-variant/30">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="font-label-md text-label-md text-on-surface">AI Diagnosis:</p>
+                                <span class="bg-primary-container/20 text-primary px-3 py-1 rounded-full font-label-sm text-label-sm">Normal</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Confidence:</p>
+                                <p class="font-label-md text-label-md text-primary">92%</p>
+                            </div>
+                            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden mt-2">
+                                <div class="h-full bg-primary" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-primary-container/10 p-3 rounded-lg">
+                            <p class="font-body-sm text-body-sm text-on-surface">
+                                <strong>Expected Outcome:</strong> Minor soft tissue injury. Home care with rest and ice, typical recovery within days.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Banner -->
+            <div class="mt-stack-lg bg-gradient-to-r from-primary-container/20 to-secondary-container/20 rounded-2xl p-8 reveal reveal-stagger-3">
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <p class="font-headline-lg text-headline-lg text-primary mb-2 card-stat-container" data-target="94">
+                            <span class="stat-number">0</span>%
+                        </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Diagnostic Accuracy</p>
+                    </div>
+                    <div>
+                        <p class="font-headline-lg text-headline-lg text-primary mb-2 card-stat-container" data-target="1250">
+                            <span class="stat-number">0</span>+
+                        </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Cases Analyzed</p>
+                    </div>
+                    <div>
+                        <p class="font-headline-lg text-headline-lg text-primary mb-2">2 min</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Average Assessment Time</p>
+                    </div>
+                    <div>
+                        <p class="font-headline-lg text-headline-lg text-primary mb-2 card-stat-container" data-target="98">
+                            <span class="stat-number">0</span>%
+                        </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Patient Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Symptom Questionnaire Section -->
+    <section class="py-stack-lg bg-surface reveal" id="assessment">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal reveal-stagger-1">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Clinical Assessment</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Complete this brief questionnaire to receive an initial triage recommendation.
+                </p>
+            </div>
+            <!-- Questionnaire Card -->
+            <div class="max-w-3xl mx-auto bg-surface-container-lowest rounded-3xl shadow-ambient border border-outline-variant/30 p-stack-lg reveal reveal-stagger-2">
+                <!-- Progress Stepper -->
+                <div class="flex items-center justify-between mb-stack-lg relative">
+                    <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-0.5 bg-surface-container-high -z-10"></div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="stepper-1" class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md text-label-md">1</div>
+                        <span id="stepper-label-1" class="font-label-sm text-label-sm text-on-surface">Injury Info</span>
+                    </div>
+                    <div class="w-full h-0.5 bg-outline-variant/30"></div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="stepper-2" class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md">2</div>
+                        <span id="stepper-label-2" class="font-label-sm text-label-sm text-on-surface-variant">Severity</span>
+                    </div>
+                    <div class="w-full h-0.5 bg-outline-variant/30"></div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="stepper-3" class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-md text-label-md">3</div>
+                        <span id="stepper-label-3" class="font-label-sm text-label-sm text-on-surface-variant">Analysis</span>
+                    </div>
+                </div>
+                <!-- Step 1 Content -->
+                <div id="step-1" class="space-y-stack-md">
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Where is the pain located?</h3>
+                        <div class="flex flex-wrap gap-2" id="location-buttons">
+                            <button onclick="selectLocation('Ankle')" class="location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" data-location="Ankle">Ankle</button>
+                            <button onclick="selectLocation('Wrist')" class="location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" data-location="Wrist">Wrist</button>
+                            <button onclick="selectLocation('Knee')" class="location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" data-location="Knee">Knee</button>
+                            <button onclick="selectLocation('Finger')" class="location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" data-location="Finger">Finger</button>
+                            <button onclick="selectLocation('Other')" class="location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" data-location="Other">Other</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">When did the injury occur?</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="selectTime('Less than 1 hour')" class="time-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Less than 1 hour</button>
+                            <button onclick="selectTime('1-6 hours')" class="time-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">1-6 hours</button>
+                            <button onclick="selectTime('6-24 hours')" class="time-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">6-24 hours</button>
+                            <button onclick="selectTime('More than 24 hours')" class="time-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">More than 24 hours</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">How did the injury happen?</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="selectMechanism('Fall')" class="mechanism-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Fall</button>
+                            <button onclick="selectMechanism('Twist')" class="mechanism-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Twist</button>
+                            <button onclick="selectMechanism('Direct Hit')" class="mechanism-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Direct Hit</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Is there any bruising?</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="selectBruising('No')" class="bruising-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">No</button>
+                            <button onclick="selectBruising('Yes')" class="bruising-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Yes</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button onclick="goToStep(2)" class="bg-primary-container text-on-primary px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all">
+                            Next Step
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 Content -->
+                <div id="step-2" class="space-y-stack-md hidden">
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Can you bear weight on it?</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input class="peer sr-only" name="weight" type="radio" value="yes" onchange="selectWeight('yes')"/>
+                                <div class="p-4 border border-outline-variant rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                                    <p class="font-label-md text-label-md text-on-surface mb-1">Yes</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Can walk or stand with minimal support.</p>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input class="peer sr-only" name="weight" type="radio" value="no" onchange="selectWeight('no')"/>
+                                <div class="p-4 border border-outline-variant rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                                    <p class="font-label-md text-label-md text-on-surface mb-1">No</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Unable to put any weight without severe pain.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Rate your pain level (1-10)</h3>
+                        <input type="range" min="1" max="10" value="5" class="w-full" id="pain-slider" oninput="updatePainValue(this.value)">
+                        <div class="flex justify-between mt-2">
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">Mild (1)</span>
+                            <span class="font-label-md text-label-md text-primary" id="pain-value">5</span>
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">Severe (10)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface">Visible Deformity?</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Does the limb look out of place or angled abnormally?</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" type="checkbox" id="deformity-check" onchange="selectDeformity(this.checked)"/>
+                            <div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+                        </label>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Is there swelling?</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="selectSwelling('None')" class="swelling-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">None</button>
+                            <button onclick="selectSwelling('Mild')" class="swelling-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Mild</button>
+                            <button onclick="selectSwelling('Moderate')" class="swelling-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Moderate</button>
+                            <button onclick="selectSwelling('Severe')" class="swelling-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Severe</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Can you move it normally?</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="selectMobility('Normal')" class="mobility-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Normal</button>
+                            <button onclick="selectMobility('Limited')" class="mobility-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Limited</button>
+                            <button onclick="selectMobility('Cannot Move')" class="mobility-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Cannot Move</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+                        <div>
+                            <p class="font-label-md text-label-md text-on-surface">Does it hurt when you press on it?</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Pain when touching the injured area</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" type="checkbox" id="tenderness-check" onchange="selectTenderness(this.checked)"/>
+                            <div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+                        </label>
+                    </div>
+                    <div class="flex justify-between pt-4">
+                        <button onclick="goToStep(1)" class="border border-outline-variant text-on-surface px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-container transition-all">
+                            Previous
+                        </button>
+                        <button onclick="goToStep(3)" class="bg-primary-container text-on-primary px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all">
+                            Next Step
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 Content - Results -->
+                <div id="step-3" class="space-y-stack-md hidden">
+                    <div class="text-center py-8">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-secondary-container/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-5xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Assessment Result</h3>
+                        <div id="result-content" class="max-w-xl mx-auto">
+                            <!-- Result will be inserted here -->
+                        </div>
+                    </div>
+                    <div class="flex justify-center pt-4">
+                        <button onclick="resetAssessment()" class="border border-outline-variant text-on-surface px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-container transition-all">
+                            Start New Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- X-Ray Upload Section -->
+    <section id="xray-section" class="py-stack-lg bg-surface reveal hidden">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal reveal-stagger-1">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">X-Ray Analysis</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Upload your X-ray image for AI-powered analysis
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-surface-container-lowest rounded-3xl shadow-ambient border border-outline-variant/30 p-stack-lg reveal reveal-stagger-2">
+                <!-- Upload Area -->
+                <div id="upload-area" class="border-2 border-dashed border-outline-variant rounded-2xl p-12 text-center hover:border-primary transition-colors cursor-pointer" onclick="document.getElementById('xray-upload-main').click()">
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl text-primary-container">upload_file</span>
+                        </div>
+                        <div>
+                            <p class="font-headline-sm text-headline-sm text-on-surface mb-2">Click to upload X-ray image</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Supports JPG, PNG, DICOM formats (Max 10MB)</p>
+                        </div>
+                        <button class="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-all">
+                            Browse Files
+                        </button>
+                    </div>
+                </div>
+                <input type="file" id="xray-upload-main" accept="image/*,.dcm" class="hidden" onchange="handleXrayUpload(event)"/>
+                
+                <!-- Preview Area (Hidden by default) -->
+                <div id="xray-preview" class="hidden mt-6">
+                    <div class="bg-surface-container-high rounded-2xl p-6">
+                        <div class="flex items-start gap-4 mb-4">
+                            <img id="xray-image" src="" alt="X-ray preview" class="w-full max-w-md mx-auto rounded-lg border border-outline-variant"/>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl mb-4">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">image</span>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface" id="file-name">filename.jpg</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant" id="file-size">2.5 MB</p>
+                                </div>
+                            </div>
+                            <button onclick="removeXray()" class="text-error hover:bg-error-container/20 p-2 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Analysis Options -->
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Which area was X-rayed?</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <button onclick="selectXrayLocation('Ankle')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Ankle</button>
+                                    <button onclick="selectXrayLocation('Wrist')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Wrist</button>
+                                    <button onclick="selectXrayLocation('Knee')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Knee</button>
+                                    <button onclick="selectXrayLocation('Elbow')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Elbow</button>
+                                    <button onclick="selectXrayLocation('Hand')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Hand</button>
+                                    <button onclick="selectXrayLocation('Foot')" class="xray-location-btn px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">Foot</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end pt-4">
+                                <button onclick="analyzeXray()" class="bg-primary-container text-on-primary px-8 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all flex items-center gap-2">
+                                    <span class="material-symbols-outlined">analytics</span>
+                                    Analyze X-Ray
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analyzing State -->
+                <div id="analyzing-state" class="hidden mt-6 p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-container/20 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-primary-container animate-spin">progress_activity</span>
+                    </div>
+                    <p class="font-headline-sm text-headline-sm text-on-surface mb-2">Analyzing X-Ray...</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Our AI is examining the image for fractures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Display Section -->
+    <section id="results-section" class="py-stack-lg bg-gradient-to-br from-surface-bright to-surface-container-low reveal hidden">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-stack-md reveal reveal-stagger-1">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Your Assessment Result</h2>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Based on your symptoms, here's our professional-grade analysis
+                    </p>
+                </div>
+                
+                <!-- Result Card Display -->
+                <div class="relative">
+                    <div id="floating-result-card" class="bg-surface-container-lowest p-stack-md rounded-2xl shadow-elevated border border-outline-variant/30 reveal reveal-stagger-2">
+                        <!-- Content will be dynamically inserted here -->
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -z-10 w-64 h-64 bg-primary-fixed/20 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full pt-stack-lg pb-stack-md border-t border-outline-variant/50 dark:border-outline/30 flat no shadows reveal">
+        <div class="flex flex-col items-center gap-stack-md px-margin-desktop max-w-container-max mx-auto text-center reveal reveal-stagger-1">
+            <div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">
+                FractureOrSprain?
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="pages/policies/privacy-policy.html">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="pages/policies/terms-of-service.html">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="pages/policies/medical-disclaimer.html">Medical Disclaimer</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="pages/support/contact-support.html">Contact Support</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="pages/policies/hipaa-compliance.html">HIPAA Compliance</a>
+            </div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant mt-4">
+                &copy; 2026 FractureOrSprain? Clinical Triage Systems. Professional Grade Assessment.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script-backend.js"></script>
+    <script type="module" src="assets/js/require-auth.js"></script>
+    <script type="module">
+        import { signOutUser } from './assets/js/auth.js';
+
+        document.getElementById('logout-button').addEventListener('click', async () => {
+            const result = await signOutUser();
+            if (result.success) {
+                window.location.href = 'auth/login.html';
+            } else {
+                alert(`Logout failed: ${result.error}`);
+            }
+        });
+    </script>
+</body>
+</html>

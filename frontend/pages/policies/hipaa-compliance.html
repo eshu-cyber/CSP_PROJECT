@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>HIPAA Compliance | FractureOrSprain?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../assets/css/styles.css"/>
+    <script src="../../assets/js/tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm dark:shadow-none">
+        <div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <a href="../../index.html" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span>FractureOrSprain?</span>
+            </a>
+            <div class="hidden md:flex gap-gutter items-center font-label-md text-label-md">
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../how-it-works/how-it-works.html">How It Works</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#assessment">Assessment</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../../index.html#case-studies">Example Scenarios</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../ai-doctor/ai-doctor.html">AI Doctor</a>
+            </div>
+            <a href="../../index.html#assessment" class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-surface-tint transition-all hover:scale-95 duration-100 ease-in-out flex items-center gap-2">
+                Start Triage <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- HIPAA Compliance Content -->
+    <section class="pt-[120px] pb-stack-lg bg-gradient-to-br from-surface-bright to-surface-container-low min-h-screen">
+        <div class="max-w-4xl mx-auto px-margin-desktop">
+            <div class="text-center mb-stack-lg">
+                <h1 class="font-display-lg text-display-lg text-on-surface mb-4">HIPAA Compliance</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Understanding Health Information Privacy and Security
+                </p>
+            </div>
+
+            <div class="bg-surface-container-lowest rounded-3xl shadow-ambient border border-outline-variant/30 p-stack-lg space-y-6">
+                <!-- What is HIPAA -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">What is HIPAA?</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                        The <strong>Health Insurance Portability and Accountability Act (HIPAA)</strong> is a federal law enacted in 1996 that establishes national standards to protect sensitive patient health information from being disclosed without the patient's consent or knowledge.
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        HIPAA applies to covered entities (healthcare providers, health plans, and healthcare clearinghouses) and their business associates who handle protected health information (PHI).
+                    </p>
+                </div>
+
+                <!-- Official HIPAA Resources -->
+                <div class="bg-primary-container/20 p-6 rounded-xl">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">link</span>
+                        <div>
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Official HIPAA Information</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                                For comprehensive information about HIPAA regulations, visit the official U.S. Department of Health & Human Services website:
+                            </p>
+                            <a href="https://www.hhs.gov/hipaa/index.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary-container text-on-primary px-6 py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-all shadow-ambient">
+                                <span class="material-symbols-outlined">open_in_new</span>
+                                Visit HHS.gov/HIPAA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key HIPAA Rules -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Key HIPAA Rules</h2>
+                    <div class="space-y-4">
+                        <div class="bg-surface-container-high p-6 rounded-xl">
+                            <h3 class="font-label-lg text-label-lg text-on-surface mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">shield</span>
+                                Privacy Rule
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">
+                                Establishes national standards for protecting individuals' medical records and personal health information. It gives patients rights over their health information and sets rules and limits on who can access and receive your health data.
+                            </p>
+                        </div>
+
+                        <div class="bg-surface-container-high p-6 rounded-xl">
+                            <h3 class="font-label-lg text-label-lg text-on-surface mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">lock</span>
+                                Security Rule
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">
+                                Requires appropriate administrative, physical, and technical safeguards to ensure the confidentiality, integrity, and security of electronic protected health information (ePHI).
+                            </p>
+                        </div>
+
+                        <div class="bg-surface-container-high p-6 rounded-xl">
+                            <h3 class="font-label-lg text-label-lg text-on-surface mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">report</span>
+                                Breach Notification Rule
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">
+                                Requires covered entities to notify affected individuals, HHS, and in some cases the media, of breaches of unsecured protected health information.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FractureOrSprain HIPAA Compliance -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">FractureOrSprain? & HIPAA</h2>
+                    
+                    <div class="bg-secondary-container/10 p-6 rounded-xl mb-4">
+                        <h3 class="font-label-lg text-label-lg text-on-surface mb-3">Our HIPAA Status</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                            FractureOrSprain? is designed with privacy and security in mind. However, as a preliminary triage and educational tool that does not establish a doctor-patient relationship or provide formal medical diagnoses, we may not be classified as a HIPAA covered entity under certain circumstances.
+                        </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            Regardless of regulatory classification, we are committed to protecting your health information using industry-standard security practices and HIPAA-aligned principles.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 bg-surface-container-high rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-2xl">encrypted</span>
+                            <div>
+                                <h4 class="font-label-md text-label-md text-on-surface mb-2">Data Encryption</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    All data transmitted between your device and our servers is encrypted using industry-standard SSL/TLS protocols. Health information is encrypted both in transit and at rest.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-4 bg-surface-container-high rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-2xl">vpn_lock</span>
+                            <div>
+                                <h4 class="font-label-md text-label-md text-on-surface mb-2">Access Controls</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    We implement strict access controls to ensure that only authorized personnel can access protected health information on a need-to-know basis.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-4 bg-surface-container-high rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-2xl">delete</span>
+                            <div>
+                                <h4 class="font-label-md text-label-md text-on-surface mb-2">Data Minimization</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    We only collect the minimum necessary information to provide our service. Session data is temporary and not permanently stored unless you explicitly consent.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-4 bg-surface-container-high rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-2xl">security</span>
+                            <div>
+                                <h4 class="font-label-md text-label-md text-on-surface mb-2">Security Audits</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Regular security assessments and vulnerability testing ensure our systems maintain high security standards aligned with HIPAA requirements.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-4 bg-surface-container-high rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-2xl">person_off</span>
+                            <div>
+                                <h4 class="font-label-md text-label-md text-on-surface mb-2">Anonymization</h4>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Data used for AI model training is anonymized and de-identified to prevent individual identification, following HIPAA de-identification standards.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Your Rights -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Your Privacy Rights</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                        Inspired by HIPAA principles, we respect your rights to:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 font-body-md text-body-md text-on-surface-variant">
+                        <li><strong>Access:</strong> Request access to the information we have about you</li>
+                        <li><strong>Correction:</strong> Request corrections to inaccurate information</li>
+                        <li><strong>Deletion:</strong> Request deletion of your personal health information</li>
+                        <li><strong>Restriction:</strong> Request restrictions on how we use your data</li>
+                        <li><strong>Confidential Communication:</strong> Request communications through specific methods</li>
+                        <li><strong>Accounting:</strong> Request an accounting of disclosures of your information</li>
+                    </ul>
+                </div>
+
+                <!-- Data Breach Protocol -->
+                <div class="bg-error-container/10 p-6 rounded-xl border border-error/30">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-error text-3xl" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+                        <div>
+                            <h3 class="font-headline-sm text-headline-sm text-error mb-2">Data Breach Protocol</h3>
+                            <p class="font-body-md text-body-md text-on-surface mb-3">
+                                In the unlikely event of a data breach involving your health information, we will:
+                            </p>
+                            <ul class="list-disc pl-6 space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+                                <li>Notify affected individuals within 60 days of discovery</li>
+                                <li>Provide detailed information about the breach and affected data</li>
+                                <li>Outline steps we're taking to address the breach</li>
+                                <li>Offer guidance on protective measures you can take</li>
+                                <li>Report to appropriate authorities as required by law</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Resources -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Learn More About HIPAA</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <a href="https://www.hhs.gov/hipaa/for-individuals/index.html" target="_blank" rel="noopener noreferrer" class="p-6 bg-surface-container-high rounded-xl hover:bg-surface-container transition-colors">
+                            <span class="material-symbols-outlined text-primary text-3xl mb-3 block">person</span>
+                            <h3 class="font-label-lg text-label-lg text-on-surface mb-2 flex items-center gap-2">
+                                HIPAA for Individuals
+                                <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                            </h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Learn about your rights under HIPAA</p>
+                        </a>
+
+                        <a href="https://www.hhs.gov/hipaa/for-professionals/index.html" target="_blank" rel="noopener noreferrer" class="p-6 bg-surface-container-high rounded-xl hover:bg-surface-container transition-colors">
+                            <span class="material-symbols-outlined text-primary text-3xl mb-3 block">work</span>
+                            <h3 class="font-label-lg text-label-lg text-on-surface mb-2 flex items-center gap-2">
+                                HIPAA for Professionals
+                                <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                            </h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Compliance guidance for healthcare providers</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Privacy Questions?</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                        If you have questions about how we protect your health information or our privacy practices, please contact us:
+                    </p>
+                    <div class="mt-4 p-4 bg-primary-container/10 rounded-xl">
+                        <p class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+                            <span class="material-symbols-outlined">email</span>
+                            eswarbussiness1@gmail.com
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-outline-variant/30">
+                    <a href="../../index.html" class="inline-flex items-center gap-2 text-primary hover:underline font-label-md text-label-md">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full pt-stack-lg pb-stack-md border-t border-outline-variant/50 dark:border-outline/30">
+        <div class="flex flex-col items-center gap-stack-md px-margin-desktop max-w-container-max mx-auto text-center">
+            <div class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">
+                FractureOrSprain?
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="privacy-policy.html">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="terms-of-service.html">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="medical-disclaimer.html">Medical Disclaimer</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="../support/contact-support.html">Contact Support</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant/80 dark:text-on-surface-variant hover:text-primary transition-opacity duration-200 hover:underline decoration-primary/30 underline-offset-4" href="hipaa-compliance.html">HIPAA Compliance</a>
+            </div>
+            <div class="font-label-sm text-label-sm text-on-surface-variant mt-4">
+                &copy; 2026 FractureOrSprain? Clinical Triage Systems. Professional Grade Assessment.
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="../../assets/js/require-auth.js"></script>
+</body>
+</html>
