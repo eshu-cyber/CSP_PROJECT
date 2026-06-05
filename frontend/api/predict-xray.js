@@ -1,18 +1,10 @@
-// Vercel Serverless Proxy for /api/predict-xray
-// Forwards the multipart image upload to Render backend.
-// Because this runs on Vercel (same origin as the frontend), CORS is never an issue.
-
-export const config = {
-    api: {
-        bodyParser: false, // Required for multipart/form-data file uploads
-        maxDuration: 60,   // 60-second timeout for model inference
-    },
-};
+// Vercel Serverless Proxy — forwards X-ray image uploads to Render backend
+// Uses CommonJS (module.exports) which is required for .js files in Vercel
 
 const RENDER_BACKEND = 'https://csp-project-f6aq.onrender.com';
 
-export default async function handler(req, res) {
-    // Handle CORS preflight
+module.exports = async function handler(req, res) {
+    // Handle preflight
     if (req.method === 'OPTIONS') {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -25,14 +17,15 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Collect the raw multipart body (file upload)
-        const chunks = [];
-        for await (const chunk of req) {
-            chunks.push(Buffer.from(chunk));
-        }
-        const rawBody = Buffer.concat(chunks);
+        // Collect raw multipart body using Node.js streams
+        const rawBody = await new Promise((resolve, reject) => {
+            const chunks = [];
+            req.on('data', chunk => chunks.push(Buffer.from(chunk)));
+            req.on('end', () => resolve(Buffer.concat(chunks)));
+            req.on('error', reject);
+        });
 
-        // Forward to Render backend with the exact same Content-Type (including boundary)
+        // Forward to Render with the same Content-Type (preserves multipart boundary)
         const response = await fetch(`${RENDER_BACKEND}/api/predict-xray`, {
             method: 'POST',
             headers: {
@@ -51,4 +44,11 @@ export default async function handler(req, res) {
             details: error.message
         });
     }
-}
+};
+
+module.exports.config = {
+    api: {
+        bodyParser: false, // Required for multipart/form-data
+        maxDuration: 60,   // 60s timeout for model inference
+    },
+};

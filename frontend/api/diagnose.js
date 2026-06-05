@@ -1,16 +1,9 @@
-// Vercel Serverless Proxy for /api/diagnose
-// Forwards JSON symptom data to the Render backend.
-// Same-origin call from browser — no CORS needed.
-
-export const config = {
-    api: {
-        maxDuration: 30,
-    },
-};
+// Vercel Serverless Proxy — forwards symptom diagnosis requests to Render backend
+// Uses CommonJS (module.exports) which is required for .js files in Vercel
 
 const RENDER_BACKEND = 'https://csp-project-f6aq.onrender.com';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
@@ -36,4 +29,10 @@ export default async function handler(req, res) {
             details: error.message
         });
     }
-}
+};
+
+module.exports.config = {
+    api: {
+        maxDuration: 30,
+    },
+};
