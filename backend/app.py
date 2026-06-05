@@ -152,17 +152,18 @@ def health():
 
 @app.route("/api/model-status", methods=["GET"])
 def model_status():
-    """Debug endpoint: try to load the CNN model and report success or full error."""
-    import sys, traceback
+    """Debug endpoint: try to load the ONNX model and report success or full error."""
+    import traceback
     try:
-        import tensorflow as tf
-        tf_version = tf.__version__
-        model = get_cnn_model()
+        import onnxruntime as ort
+        ort_version = ort.__version__
+        session = get_cnn_model()
+        inputs = [i.name for i in session.get_inputs()]
         return jsonify({
             "status": "ok",
-            "tensorflow_version": tf_version,
+            "onnxruntime_version": ort_version,
             "model_loaded": True,
-            "model_params": model.count_params()
+            "input_names": inputs
         }), 200
     except Exception as e:
         return jsonify({
@@ -215,22 +216,19 @@ def diagnose():
     return jsonify(result), 200
 
 
-# ── CNN Model Lazy Loading ──────────────────────────────────────────────────
-_cnn_model = None
+# ── CNN Model Lazy Loading (ONNX Runtime — 30MB vs TF's 400MB) ──────────────
+_ort_session = None
 
 def get_cnn_model():
-    global _cnn_model
-    if _cnn_model is None:
-        import tensorflow as tf
-        import os
-        os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
-        os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
-
-        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "CNN/bone_fracture_model.h5")
+    """Returns an ONNX Runtime InferenceSession — memory-safe on Render free tier."""
+    global _ort_session
+    if _ort_session is None:
+        import onnxruntime as ort
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "CNN/bone_fracture_model.onnx")
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"bone_fracture_model.h5 not found — ensure the model file is in backend/CNN/")
-        _cnn_model = tf.keras.models.load_model(model_path, compile=False)
-    return _cnn_model
+            raise FileNotFoundError(f"bone_fracture_model.onnx not found in backend/CNN/")
+        _ort_session = ort.InferenceSession(model_path, providers=["CPUExecutionProvider"])
+    return _ort_session
 
 
 
@@ -255,9 +253,11 @@ def predict_xray():
         img_array = np.array(img_resized, dtype=np.float32) / 255.0
         img_batch = np.expand_dims(img_array, axis=0)
         
-        # Load model & predict
-        model = get_cnn_model()
-        prediction = float(model.predict(img_batch)[0][0])
+        # Load ONNX session & run inference
+        session = get_cnn_model()
+        input_name = session.get_inputs()[0].name
+        output = session.run(None, {input_name: img_batch})
+        prediction = float(output[0][0][0])
         
         # Calibrated threshold based on model output: 0.002 separates fractured and normal images
         THRESHOLD = 0.002
