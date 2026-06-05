@@ -150,6 +150,28 @@ def health():
     }), 200
 
 
+@app.route("/api/model-status", methods=["GET"])
+def model_status():
+    """Debug endpoint: try to load the CNN model and report success or full error."""
+    import sys, traceback
+    try:
+        import tensorflow as tf
+        tf_version = tf.__version__
+        model = get_cnn_model()
+        return jsonify({
+            "status": "ok",
+            "tensorflow_version": tf_version,
+            "model_loaded": True,
+            "model_params": model.count_params()
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        }), 500
+
+
 @app.route("/api/questions", methods=["GET"])
 def questions():
     """Return the questionnaire structure so any frontend can build the form."""
