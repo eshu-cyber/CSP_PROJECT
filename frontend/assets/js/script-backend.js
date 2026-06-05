@@ -1,5 +1,9 @@
 // Backend API configuration
-const BACKEND_API_URL = 'http://localhost:5000';
+// Auto-detects: uses Render URL when deployed, localhost when developing locally
+const IS_LOCAL_ENV = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const BACKEND_API_URL = IS_LOCAL_ENV
+    ? 'http://localhost:5000'
+    : 'https://csp-project-f6aq.onrender.com';
 
 // Assessment data storage - matches backend dataset
 const assessmentData = {
