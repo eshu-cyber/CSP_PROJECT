@@ -200,7 +200,8 @@ def get_cnn_model():
     global _cnn_model
     if _cnn_model is None:
         import os
-        # Minimize TensorFlow memory footprint on Render free tier (512MB RAM)
+        # Critical: tell Keras 3 to use TensorFlow backend (not JAX or PyTorch)
+        os.environ['KERAS_BACKEND'] = 'tensorflow'
         os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
         os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
 
