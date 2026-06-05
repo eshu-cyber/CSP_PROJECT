@@ -199,7 +199,12 @@ _cnn_model = None
 def get_cnn_model():
     global _cnn_model
     if _cnn_model is None:
-        import tensorflow as tf
+        import os
+        # Minimize TensorFlow memory footprint on Render free tier (512MB RAM)
+        os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
+        os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
+
+        import keras  # Standalone Keras 3 — lighter than tf.keras
         model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "CNN/bone_fracture_model.keras")
         if not os.path.exists(model_path):
             model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../CNN/bone_fracture_model.keras")
@@ -207,8 +212,9 @@ def get_cnn_model():
             model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bone_fracture_model.keras")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"bone_fracture_model.keras not found at {model_path}")
-        _cnn_model = tf.keras.models.load_model(model_path, compile=False)
+        _cnn_model = keras.models.load_model(model_path, compile=False)
     return _cnn_model
+
 
 
 @app.route("/api/predict-xray", methods=["POST"])
