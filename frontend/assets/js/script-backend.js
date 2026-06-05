@@ -1,9 +1,10 @@
 // Backend API configuration
-// Auto-detects: uses Render URL when deployed, localhost when developing locally
+// LOCAL: calls Flask on localhost:5000 directly
+// VERCEL: uses relative /api/* routes (Vercel serverless proxies) — no CORS issues
 const IS_LOCAL_ENV = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const BACKEND_API_URL = IS_LOCAL_ENV
     ? 'http://localhost:5000'
-    : 'https://csp-project-f6aq.onrender.com';
+    : ''; // Empty = use Vercel proxy routes (/api/predict-xray, /api/diagnose)
 
 // Assessment data storage - matches backend dataset
 const assessmentData = {
