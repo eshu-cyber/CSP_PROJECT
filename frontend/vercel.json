@@ -1,17 +1,15 @@
 {
-    "functions": {
-        "api/predict-xray.js": { "maxDuration": 60 },
-        "api/diagnose.js":     { "maxDuration": 30 },
-        "api/chat.js":         { "maxDuration": 30 }
-    },
-    "headers": [
+    "rewrites": [
         {
-            "source": "/api/(.*)",
-            "headers": [
-                { "key": "Access-Control-Allow-Origin",  "value": "*" },
-                { "key": "Access-Control-Allow-Methods", "value": "POST, GET, OPTIONS" },
-                { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
-            ]
+            "source": "/api/predict-xray",
+            "destination": "https://csp-project-f6aq.onrender.com/api/predict-xray"
+        },
+        {
+            "source": "/api/diagnose",
+            "destination": "https://csp-project-f6aq.onrender.com/api/diagnose"
         }
-    ]
+    ],
+    "functions": {
+        "api/chat.js": { "maxDuration": 30 }
+    }
 }
