@@ -207,7 +207,7 @@ def get_cnn_model():
             model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bone_fracture_model.keras")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"bone_fracture_model.keras not found at {model_path}")
-        _cnn_model = tf.keras.models.load_model(model_path)
+        _cnn_model = tf.keras.models.load_model(model_path, compile=False)
     return _cnn_model
 
 
