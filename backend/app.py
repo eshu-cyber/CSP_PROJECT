@@ -15,7 +15,13 @@ from flask_cors import CORS
 from model.predict import predict_injury
 
 app = Flask(__name__)
-CORS(app)   # allow requests from the React frontend
+
+# Allow requests from any origin (Vercel frontend, localhost, etc.)
+CORS(app, resources={r"/api/*": {
+    "origins": "*",
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"]
+}})
 
 
 # ── Questionnaire definition ──────────────────────────────────────────────────
