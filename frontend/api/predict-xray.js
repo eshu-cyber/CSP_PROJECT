@@ -1,54 +1,62 @@
-// Vercel Serverless Proxy — forwards X-ray image uploads to Render backend
-// Uses CommonJS (module.exports) which is required for .js files in Vercel
+/**
+ * Vercel Serverless Function — X-Ray Analysis Proxy
+ * Forwards multipart image uploads to Render backend.
+ * bodyParser MUST be false to get the raw stream for multipart/form-data.
+ */
 
-const RENDER_BACKEND = 'https://csp-project-f6aq.onrender.com';
+const RENDER = 'https://csp-project-f6aq.onrender.com';
 
-module.exports = async function handler(req, res) {
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        return res.status(200).end();
-    }
-
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-
+async function handler(req, res) {
+    // Always return JSON, never let Vercel's HTML error page through
     try {
-        // Collect raw multipart body using Node.js streams
-        const rawBody = await new Promise((resolve, reject) => {
-            const chunks = [];
-            req.on('data', chunk => chunks.push(Buffer.from(chunk)));
-            req.on('end', () => resolve(Buffer.concat(chunks)));
-            req.on('error', reject);
-        });
+        if (req.method === 'OPTIONS') {
+            return res.status(200).end();
+        }
+        if (req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method not allowed' });
+        }
 
-        // Forward to Render with the same Content-Type (preserves multipart boundary)
-        const response = await fetch(`${RENDER_BACKEND}/api/predict-xray`, {
+        // Collect raw request body chunks (works with Node 18 async iteration)
+        const chunks = [];
+        for await (const chunk of req) {
+            chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+        }
+        const rawBody = Buffer.concat(chunks);
+
+        // Forward to Render with the exact same Content-Type (preserves multipart boundary)
+        const upstream = await fetch(`${RENDER}/api/predict-xray`, {
             method: 'POST',
             headers: {
-                'Content-Type': req.headers['content-type'],
+                'content-type': req.headers['content-type'] || 'multipart/form-data',
             },
             body: rawBody,
         });
 
-        const data = await response.json();
-        return res.status(response.status).json(data);
+        let data;
+        const text = await upstream.text();
+        try {
+            data = JSON.parse(text);
+        } catch {
+            data = { error: 'Backend returned non-JSON', raw: text.slice(0, 500) };
+        }
 
-    } catch (error) {
-        console.error('Proxy error:', error);
+        return res.status(upstream.status).json(data);
+
+    } catch (err) {
+        console.error('[predict-xray proxy error]', err);
         return res.status(500).json({
-            error: 'Failed to connect to analysis server',
-            details: error.message
+            error: 'Proxy function crashed',
+            message: err.message,
         });
     }
-};
+}
 
-module.exports.config = {
+// bodyParser must be false — Vercel must NOT touch the multipart body
+handler.config = {
     api: {
-        bodyParser: false, // Required for multipart/form-data
-        maxDuration: 60,   // 60s timeout for model inference
+        bodyParser: false,
+        maxDuration: 60,
     },
 };
+
+module.exports = handler;

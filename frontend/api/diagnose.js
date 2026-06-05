@@ -1,38 +1,48 @@
-// Vercel Serverless Proxy — forwards symptom diagnosis requests to Render backend
-// Uses CommonJS (module.exports) which is required for .js files in Vercel
+/**
+ * Vercel Serverless Function — Diagnose Proxy
+ * Forwards JSON symptom data to Render backend.
+ */
 
-const RENDER_BACKEND = 'https://csp-project-f6aq.onrender.com';
+const RENDER = 'https://csp-project-f6aq.onrender.com';
 
-module.exports = async function handler(req, res) {
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-
+async function handler(req, res) {
     try {
-        const response = await fetch(`${RENDER_BACKEND}/api/diagnose`, {
+        if (req.method === 'OPTIONS') {
+            return res.status(200).end();
+        }
+        if (req.method !== 'POST') {
+            return res.status(405).json({ error: 'Method not allowed' });
+        }
+
+        const upstream = await fetch(`${RENDER}/api/diagnose`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(req.body),
         });
 
-        const data = await response.json();
-        return res.status(response.status).json(data);
+        let data;
+        const text = await upstream.text();
+        try {
+            data = JSON.parse(text);
+        } catch {
+            data = { error: 'Backend returned non-JSON', raw: text.slice(0, 500) };
+        }
 
-    } catch (error) {
-        console.error('Proxy error:', error);
+        return res.status(upstream.status).json(data);
+
+    } catch (err) {
+        console.error('[diagnose proxy error]', err);
         return res.status(500).json({
-            error: 'Failed to connect to diagnosis server',
-            details: error.message
+            error: 'Proxy function crashed',
+            message: err.message,
         });
     }
-};
+}
 
-module.exports.config = {
+handler.config = {
     api: {
         maxDuration: 30,
     },
 };
+
+module.exports = handler;
